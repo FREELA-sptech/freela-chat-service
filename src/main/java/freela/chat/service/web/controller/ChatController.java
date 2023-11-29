@@ -26,7 +26,7 @@ public class ChatController {
 
     @PostMapping
     public ResponseEntity<Chat> create(@RequestBody CreateChatRequest request){
-        return ResponseEntity.ok(this.chatService.create(request));
+            return ResponseEntity.ok(this.chatService.create(request));
     }
 
     @GetMapping

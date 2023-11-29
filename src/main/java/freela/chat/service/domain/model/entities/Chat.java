@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "chat_bff")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
