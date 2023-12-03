@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ChatService implements IChatService {
@@ -19,9 +20,11 @@ public class ChatService implements IChatService {
 
     @Override
     public Chat create(CreateChatRequest chatRequest) {
-        Chat chatResponse = this.chatRepository.findByUserIdAndFreelancerId(chatRequest.getUserId(), chatRequest.getFreelancerId()).orElseThrow(
-                () -> new RuntimeException("Chat nao encontrado!")
-        );
+        Optional<Chat> chatResponse = this.chatRepository.findByUserIdAndFreelancerId(chatRequest.getUserId(), chatRequest.getFreelancerId());
+
+        if (chatResponse.isPresent()) {
+            throw new RuntimeException("Chat Existente");
+        }
 
         Chat chat = new Chat(
                 chatRequest.getFreelancerId(),
