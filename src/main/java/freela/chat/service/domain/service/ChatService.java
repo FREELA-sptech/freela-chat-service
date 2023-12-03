@@ -19,6 +19,10 @@ public class ChatService implements IChatService {
 
     @Override
     public Chat create(CreateChatRequest chatRequest) {
+        Chat chatResponse = this.chatRepository.findByUserIdAndFreelancerId(chatRequest.getUserId(), chatRequest.getFreelancerId()).orElseThrow(
+                () -> new Exception("Chat nao encontrado!")
+        );
+
         Chat chat = new Chat(
                 chatRequest.getFreelancerId(),
                 chatRequest.getUserId(),
